@@ -51,8 +51,12 @@ export enum AavePools {
 
 export enum eContractid {
   Example = 'Example',
-  LootlotNFT = "LootlotNFT",
-  RoosterwarsNFT = "RoosterwarsNFT",
+  PeasNFT = "PeasNFT",
+  PefpNFT = "PefpNFT",
+  PlayEstatesBrickToken = "PlayEstatesBrickToken",
+  PnftNFT = "PnftNFT",
+  PnftStaking = "PnftStaking",
+  NFTEngine = "NFTEngine",
   MintableERC20 = 'MintableERC20',
   Proxy = 'Proxy',
   WETH = 'WETH',

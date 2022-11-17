@@ -6,16 +6,22 @@ import bignumberChai from 'chai-bignumber';
 import { almostEqual } from './almost-equal';
 import { tEthereumAddress } from '../../scripts/helpers/types';
 import { 
-  MinionverseNFT, 
-  RoosterwarsNFT,
-  GiftContractV2, 
-  SaleContract } from '../../typechain-types';
+  PeasNFT, 
+  PefpNFT,
+  PlayEstatesBrickToken,
+  PlayEstatesTokenization,
+  PnftStaking,
+  GiftContractV2 
+} from '../../typechain-types';
 import { getEthersSigners } from '../../scripts/helpers/contracts-helpers';
 import { 
-  getMinionverseNFT, 
-  getRoosterwarsNFT, 
-  getGiftContractV2, 
-  getSaleContract } from '../../scripts/helpers/contracts-getters';
+  getPeasNFT, 
+  getPefpNFT, 
+  getPnftContract,
+  getPnftStakingContract,
+  getPbrtContract,
+  getGiftContractV2
+} from '../../scripts/helpers/contracts-getters';
 import { evmRevert, evmSnapshot } from '../../scripts/helpers/misc-utils';
 
 chai.use(bignumberChai());
@@ -39,10 +45,12 @@ export interface TestEnv {
   minter: SignerWithAddress;
   signer: SignerWithAddress;
   users: SignerWithAddress[];
-  minionverseNFT: MinionverseNFT;
-  roosterwarsNFT: RoosterwarsNFT;
+  peasNFT: PeasNFT;
+  pefpNFT: PefpNFT;
+  pnft: PlayEstatesTokenization;
+  pnftStaking: PnftStaking;
+  pbrt: PlayEstatesBrickToken;
   giftContractV2: GiftContractV2;
-  saleContract: SaleContract;
 }
 
 const testEnv: TestEnv = {
@@ -52,10 +60,12 @@ const testEnv: TestEnv = {
   minter: {} as SignerWithAddress,
   signer: {} as SignerWithAddress,
   users: [] as SignerWithAddress[],
-  minionverseNFT: {} as MinionverseNFT,
-  roosterwarsNFT: {} as RoosterwarsNFT,
-  giftContractV2: {} as GiftContractV2,
-  saleContract: {} as SaleContract,
+  peasNFT: {} as PeasNFT,
+  pefpNFT: {} as PefpNFT,
+  pnft: {} as PlayEstatesTokenization,
+  pnftStaking: {} as PnftStaking,
+  pbrt: {} as PlayEstatesBrickToken,
+  giftContractV2: {} as GiftContractV2
 }
 
 export async function initializeMakeSuite() {
@@ -73,10 +83,11 @@ export async function initializeMakeSuite() {
     });
   }
   testEnv.deployer = deployer;
-  testEnv.minionverseNFT = await getMinionverseNFT();
-  testEnv.roosterwarsNFT = await getRoosterwarsNFT();
-  testEnv.giftContractV2 = await getGiftContractV2();
-  testEnv.saleContract =  await getSaleContract();
+  testEnv.peasNFT =  await getPeasNFT();
+  testEnv.pefpNFT =  await getPefpNFT();
+  testEnv.pbrt =  await getPbrtContract();
+  testEnv.pnft =  await getPnftContract();
+  testEnv.pnftStaking =  await getPnftStakingContract();
 }
 
 const setSnapshot = async () => {

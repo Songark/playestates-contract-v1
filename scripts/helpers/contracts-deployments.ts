@@ -1,15 +1,20 @@
 
 import { 
-  LootlotNFT__factory, 
-  RoosterwarsNFT__factory, 
-  SaleContract__factory, 
-  GiftContractV2__factory } from "../../typechain-types";
+    GiftContractV2__factory, 
+    PeasNFT__factory, 
+    PefpNFT__factory,
+    PlayEstatesBrickToken__factory,
+    PlayEstatesTokenization__factory,
+    PnftStaking__factory,
+    MembershipNFT__factory,
+    NFTEngineV1__factory
+} from "../../typechain-types";
 import { getFirstSigner } from "./contracts-getters";
 import { withSaveAndVerify } from "./contracts-helpers";
 import { eContractid, tEthereumAddress } from "./types";
 import { Signer } from 'ethers';
 
-export const deployLootlotNFT = async (
+export const deployPeasNFT = async (
   deployer: Signer,
   name: string,
   symbol: string,
@@ -17,8 +22,8 @@ export const deployLootlotNFT = async (
   confirms: number = 1
 ) => {
   const instance = await withSaveAndVerify(
-    await new LootlotNFT__factory(deployer).deploy(name, symbol),
-    eContractid.LootlotNFT,
+    await new PeasNFT__factory(deployer).deploy(name, symbol),
+    eContractid.PeasNFT,
     [name, symbol],
     verify,
     confirms
@@ -26,7 +31,7 @@ export const deployLootlotNFT = async (
   return instance;
 };
 
-export const deployRoosterwarsNFT = async (
+export const deployPefpNFT = async (
   deployer: Signer,
   name: string,
   symbol: string,
@@ -34,9 +39,61 @@ export const deployRoosterwarsNFT = async (
   confirms: number = 1
 ) => {
   const instance = await withSaveAndVerify(
-    await new RoosterwarsNFT__factory(deployer).deploy(name, symbol),
-    eContractid.RoosterwarsNFT,
+    await new PefpNFT__factory(deployer).deploy(name, symbol),
+    eContractid.PefpNFT,
     [name, symbol],
+    verify,
+    confirms
+  );
+  return instance;
+};
+
+export const deployPbrt = async (
+  deployer: Signer,
+  name: string,
+  symbol: string,
+  verify?: boolean,
+  confirms: number = 1
+) => {
+  const instance = await withSaveAndVerify(
+    await new PlayEstatesBrickToken__factory(deployer).deploy(name, symbol),
+    eContractid.PlayEstatesBrickToken,
+    [name, symbol],
+    verify,
+    confirms
+  );
+  return instance;
+};
+
+export const deployPnft = async (
+  deployer: Signer,
+  name: string,
+  symbol: string,
+  pool: string,
+  supply: number,
+  verify?: boolean,
+  confirms: number = 1
+) => {
+  const instance = await withSaveAndVerify(
+    await new PlayEstatesTokenization__factory(deployer).deploy(name, symbol, pool, supply),
+    eContractid.PnftNFT,
+    [name, symbol, pool],
+    verify,
+    confirms
+  );
+  return instance;
+};
+
+export const deployPnftStaking = async (
+  deployer: Signer,
+  rewardToken: string,
+  verify?: boolean,
+  confirms: number = 1
+) => {
+  const instance = await withSaveAndVerify(
+    await new PnftStaking__factory(deployer).deploy(rewardToken),
+    eContractid.PnftStaking,
+    [rewardToken],
     verify,
     confirms
   );
@@ -54,15 +111,20 @@ export const deployGiftContractV2 = async (verify?: boolean, confirms: number = 
   return instance;
 }
 
-export const deploySaleContract = async (token: tEthereumAddress, pool: tEthereumAddress, verify?: boolean, confirms: number = 1) => {
+export const deployMembershipNFT = async (
+  deployer: Signer,
+  name: string,
+  symbol: string,
+  pool: string,
+  verify?: boolean,
+  confirms: number = 1
+) => {
   const instance = await withSaveAndVerify(
-    await new SaleContract__factory(await getFirstSigner()).deploy(),
-    eContractid.SaleContract,
-    [],
+    await new MembershipNFT__factory(deployer).deploy(name, symbol),
+    eContractid.PnftNFT,
+    [name, symbol],
     verify,
     confirms
   );
-  await instance.initialize(token, pool);
   return instance;
-}
-
+};

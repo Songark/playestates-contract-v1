@@ -23,12 +23,6 @@ contract PlayEstatesBrickToken is ERC20, AccessControl {
         _mint(to, amount * 10 ** decimals());
     }
 
-    function decimals() 
-    public 
-    view virtual override returns (uint8) {
-        return 0;
-    }
-
     function setGameEngine(address gameEngine)
     public 
     onlyRole(DEFAULT_ADMIN_ROLE) {

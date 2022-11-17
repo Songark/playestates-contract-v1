@@ -27,11 +27,11 @@ contract PefpNFT is ERC721Psi, IPefpNFT, Ownable {
     bool private _locked;
     uint256 public maxOwnLimit = 4;
 
-    constructor(string memory name_, string memory symbol_, string memory baseURI_) 
+    constructor(string memory name_, string memory symbol_) 
         ERC721Psi(name_, symbol_) {
         
         _locked = true;
-        baseURI = baseURI_;
+        baseURI = "https://playestates.mypinata.cloud/ipfs/QmSzaRSHQ6yeYPe7oR2umyACF84otR2DwCmTUX4Lrrgv9c";
     }
 
     function mint(

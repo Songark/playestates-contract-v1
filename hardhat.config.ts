@@ -7,6 +7,7 @@ import "@typechain/hardhat";
 import "@nomiclabs/hardhat-ethers";
 import "hardhat-gas-reporter";
 import "hardhat-abi-exporter";
+import "hardhat-contract-sizer";
 
 dotenv.config();
 
@@ -55,11 +56,6 @@ const config: HardhatUserConfig = {
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [`0x${process.env.PRIVATE_KEY}`] : [],
     },
-    rinkeby: {
-      url: process.env.ETH_RINKEBY_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
-    },
     goerli: {
       url: process.env.ETH_GOERLI_URL || "",
       accounts:
@@ -93,7 +89,14 @@ const config: HardhatUserConfig = {
     coinmarketcap: process.env.COINMARKETCAP_API_KEY, 
     gasPriceApi: "https://api.etherscan.io/api?module=proxy&action=eth_gasPrice"
   },
-  
+
+  contractSizer: {
+    alphaSort: true,
+    disambiguatePaths: false,
+    runOnCompile: true,
+    strict: false,
+  },
+
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
   },

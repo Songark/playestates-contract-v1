@@ -2,9 +2,9 @@
 pragma solidity ^0.8.4;
 
 interface IPnftStaking {
-    event RewardTokenUpdated(address oldToken, address newToken);
-    event Staked(address indexed account, uint256 tokenId);
-    event Withdrawn(address indexed account, uint256 tokenId);
+    event Staked(address indexed account, address indexed nftContract, uint256 tokenId);
+    event Withdrawn(address indexed account, address indexed nftContract, uint256 tokenId);
+    event DepositedLiquidity(uint256 totalAmount, uint256 poolAmount);
     event Harvested(address indexed account, uint256 amount);
     event InsufficientRewardToken(
         address indexed account,
