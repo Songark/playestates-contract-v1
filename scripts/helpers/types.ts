@@ -51,6 +51,7 @@ export enum AavePools {
 
 export enum eContractid {
   Example = 'Example',
+  MembershipNFT = "MembershipNFT",
   PeasNFT = "PeasNFT",
   PefpNFT = "PefpNFT",
   PlayEstatesBrickToken = "PlayEstatesBrickToken",
@@ -67,6 +68,7 @@ export enum eContractid {
   SaleContract = "SaleContract",
   GiftContract = "GiftContract",
   GiftContractV2 = "GiftContractV2",
+  AddressProvider = "AddressProvider"
 }
 
 /*

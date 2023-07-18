@@ -6,17 +6,17 @@
 import hre from "hardhat";
 import { names, symbols, totalsupply, treasury } from "../helpers/constants";
 import { getEthersSigners } from "../helpers/contracts-helpers";
-import { getLootlotNFT, getRoosterwarsNFT } from "../helpers/contracts-getters";
+import { getPeasNFT } from "../helpers/contracts-getters";
 import { BigNumber } from "ethers";
 
 async function main() {
   const currentNetwork = hre.network.name;
   const [deployer] = await getEthersSigners();
   const owner = await deployer.getAddress();
-  console.log("Unlocking nft tokens, owner account: ", owner);
+  console.log("Unlocking PEAS NFT, owner account: ", owner);
   
-  const monftInstance = await getLootlotNFT();
-  await monftInstance.unlock({gasLimit: '1000000'});
+  const peasNFT = await getPeasNFT();
+  await peasNFT.unlock({gasLimit: '1000000'});
   console.log("Finishied unlocking process");
 }
 

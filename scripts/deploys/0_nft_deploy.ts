@@ -5,30 +5,35 @@
 // Runtime Environment's members available in the global scope.
 import hre from "hardhat";
 import { 
-  deployLootlotNFT,
-  deployRoosterwarsNFT
+  deployMembershipNFT,
+  deployPeasNFT,
+  deployPefpNFT
 } from "../helpers/contracts-deployments";
 import { names, symbols, totalsupply, treasury } from "../helpers/constants";
 import { getEthersSigners } from "../helpers/contracts-helpers";
-import { token } from "../../typechain-types/@openzeppelin/contracts";
+import { initAddresses, pnftMap } from "./common";
 
 async function main() {
   const currentNetwork = hre.network.name;
   const [deployer] = await getEthersSigners();
   console.log("Deploying nft contracts with the account: ", await deployer.getAddress());
-  
-  const monftInstance = await deployLootlotNFT(deployer, names[0], symbols[0], true, 5);  
-  console.log(names[0], "deployed to: ", monftInstance.address);
-  await monftInstance.setTreasury(treasury);
+  const deployerAddress = await deployer.getAddress();
+  const addresses = initAddresses(currentNetwork, deployerAddress);
 
-  // const rsnftInstance = await deployRoosterwarsNFT(deployer, names[1], symbols[1], true, 5);
-  // console.log(names[1], "deployed to: ", rsnftInstance.address);
-  // await rsnftInstance.setTreasury(treasury);
+  const ownkNFT = await deployMembershipNFT(deployer, names[0], symbols[0], true, 5);  
+  console.log(names[0], "deployed to: ", ownkNFT.address);
+
+  const peasNFT = await deployPeasNFT(deployer, names[1], symbols[1], true, 5);  
+  console.log(names[1], "deployed to: ", peasNFT.address);
+  await peasNFT.setTreasury(treasury);
 
   // In the Polygon mainnet, Minted tokens(+10) are not appeared on Opensea, so split with 5 items for each request
-  for (let i = 0; i < 40; i++) {
-    await monftInstance.mint(treasury, totalsupply, {gasLimit: '1000000'});
-    // await rsnftInstance.mint(treasury, totalsupply, tokenType, {gasLimit: '10000000'});  
+  if (currentNetwork == 'mumbai' || currentNetwork == "goerli") {      
+    await peasNFT.unlock();  
+    for (let i = 0; i < addresses.testers.length; i++) {
+      await ownkNFT.mint(addresses.testers[i], totalsupply, 0, {gasLimit: '1000000'});
+      await peasNFT.mint(addresses.testers[i], totalsupply, {gasLimit: '1000000'});
+    }  
   }
  
   console.log("Finishied deploying process");

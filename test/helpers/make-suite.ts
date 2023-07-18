@@ -11,7 +11,7 @@ import {
   PlayEstatesBrickToken,
   PlayEstatesTokenization,
   PnftStaking,
-  GiftContractV2 
+  PlayEstatesAddressProvider 
 } from '../../typechain-types';
 import { getEthersSigners } from '../../scripts/helpers/contracts-helpers';
 import { 
@@ -20,7 +20,7 @@ import {
   getPnftContract,
   getPnftStakingContract,
   getPbrtContract,
-  getGiftContractV2
+  getAddressProvider
 } from '../../scripts/helpers/contracts-getters';
 import { evmRevert, evmSnapshot } from '../../scripts/helpers/misc-utils';
 
@@ -50,7 +50,7 @@ export interface TestEnv {
   pnft: PlayEstatesTokenization;
   pnftStaking: PnftStaking;
   pbrt: PlayEstatesBrickToken;
-  giftContractV2: GiftContractV2;
+  addressProvider: PlayEstatesAddressProvider;
 }
 
 const testEnv: TestEnv = {
@@ -65,7 +65,7 @@ const testEnv: TestEnv = {
   pnft: {} as PlayEstatesTokenization,
   pnftStaking: {} as PnftStaking,
   pbrt: {} as PlayEstatesBrickToken,
-  giftContractV2: {} as GiftContractV2
+  addressProvider: {} as PlayEstatesAddressProvider
 }
 
 export async function initializeMakeSuite() {
@@ -88,6 +88,7 @@ export async function initializeMakeSuite() {
   testEnv.pbrt =  await getPbrtContract();
   testEnv.pnft =  await getPnftContract();
   testEnv.pnftStaking =  await getPnftStakingContract();
+  testEnv.addressProvider = await getAddressProvider();
 }
 
 const setSnapshot = async () => {

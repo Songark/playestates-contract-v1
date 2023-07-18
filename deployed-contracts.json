@@ -3,6 +3,10 @@
     "hardhat": {
       "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
       "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    },
+    "goerli": {
+      "address": "0xe5FAEba50BCD4E1fCf059558adeC8124E470a639",
+      "deployer": "0x09671368DdB64405d3F2E029E8c0DB9c80Ee7234"
     }
   },
   "PefpNFT": {
@@ -15,21 +19,39 @@
     "hardhat": {
       "address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
       "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    },
+    "goerli": {
+      "address": "0x223FeAAFE9880A6359dC32Bd9b647C010C9953d2",
+      "deployer": "0x09671368DdB64405d3F2E029E8c0DB9c80Ee7234"
     }
   },
   "PlayEstatesBrickToken": {
     "hardhat": {
       "address": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
       "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    },
+    "goerli": {
+      "address": "0x5A7ba86C5CB0A61463bA90424792363C2aEa6652",
+      "deployer": "0x09671368DdB64405d3F2E029E8c0DB9c80Ee7234"
     }
   },
   "PnftStaking": {
     "hardhat": {
-      "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "address": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
       "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
     },
     "goerli": {
       "address": "0x93F9a578b4E632F0A343486875a8104FCb34F029",
+      "deployer": "0x09671368DdB64405d3F2E029E8c0DB9c80Ee7234"
+    }
+  },
+  "AddressProvider": {
+    "hardhat": {
+      "address": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    },
+    "goerli": {
+      "address": "0xc4993C0799619e62367BbFC60e3D2F8572991D25",
       "deployer": "0x09671368DdB64405d3F2E029E8c0DB9c80Ee7234"
     }
   }

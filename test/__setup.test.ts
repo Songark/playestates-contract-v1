@@ -10,7 +10,7 @@ import {
   deployPbrt,
   deployPnft,
   deployPnftStaking,
-  deployGiftContractV2,   
+  deployAddressProvider,   
 } from "../scripts/helpers/contracts-deployments";
 import {names, symbols} from "./helpers/constants";
 
@@ -27,6 +27,25 @@ const buildTestEnv = async (deployer: Signer) => {
   );
   const pbrtIns = await deployPbrt(deployer, names[2], symbols[2]);
   await deployPnftStaking(deployer, pbrtIns.address);
+  const addressProviderContract = await deployAddressProvider(deployer);
+  let contractId = hre.ethers.utils.formatBytes32String("marketplace");
+  await addressProviderContract.setAddress(contractId, "0xe09868b464f39daD43642E3e1F80a44842B01140");
+  contractId = hre.ethers.utils.formatBytes32String("airdrop_peas");
+  await addressProviderContract.setAddress(contractId, hre.ethers.constants.AddressZero);
+  contractId = hre.ethers.utils.formatBytes32String("pnftstaking");
+  await addressProviderContract.setAddress(contractId, "0x93F9a578b4E632F0A343486875a8104FCb34F029");
+  contractId = hre.ethers.utils.formatBytes32String("gameengine");
+  await addressProviderContract.setAddress(contractId, "0x6972bEdf2196502897c78E0295eC2862f684d2b4");
+  contractId = hre.ethers.utils.formatBytes32String("pbrt");
+  await addressProviderContract.setAddress(contractId, "0x5A7ba86C5CB0A61463bA90424792363C2aEa6652");
+  contractId = hre.ethers.utils.formatBytes32String("peas");
+  await addressProviderContract.setAddress(contractId, "0xe5FAEba50BCD4E1fCf059558adeC8124E470a639");
+  contractId = hre.ethers.utils.formatBytes32String("pefp");
+  await addressProviderContract.setAddress(contractId, hre.ethers.constants.AddressZero);
+  contractId = hre.ethers.utils.formatBytes32String("ownk");
+  await addressProviderContract.setAddress(contractId, "0x223FeAAFE9880A6359dC32Bd9b647C010C9953d2");
+  contractId = hre.ethers.utils.formatBytes32String("pnft_ss");
+  await addressProviderContract.setAddress(contractId, "0xe61407f2e48167008Abe8DEF35E7EAcb77b40023");
 }
 
 

@@ -7,7 +7,7 @@ import {
     PlayEstatesTokenization__factory,
     PnftStaking__factory,
     MembershipNFT__factory,
-    NFTEngineV1__factory
+    PlayEstatesAddressProvider__factory
 } from "../../typechain-types";
 import { getFirstSigner } from "./contracts-getters";
 import { withSaveAndVerify } from "./contracts-helpers";
@@ -115,7 +115,6 @@ export const deployMembershipNFT = async (
   deployer: Signer,
   name: string,
   symbol: string,
-  pool: string,
   verify?: boolean,
   confirms: number = 1
 ) => {
@@ -123,6 +122,21 @@ export const deployMembershipNFT = async (
     await new MembershipNFT__factory(deployer).deploy(name, symbol),
     eContractid.PnftNFT,
     [name, symbol],
+    verify,
+    confirms
+  );
+  return instance;
+};
+
+export const deployAddressProvider = async (
+  deployer: Signer,
+  verify?: boolean,
+  confirms: number = 1
+) => {
+  const instance = await withSaveAndVerify(
+    await new PlayEstatesAddressProvider__factory(deployer).deploy(),
+    eContractid.AddressProvider,
+    [],
     verify,
     confirms
   );

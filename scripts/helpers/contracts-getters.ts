@@ -8,7 +8,7 @@ import {
     PlayEstatesTokenization__factory,
     PnftStaking__factory,
     MembershipNFT__factory,
-    NFTEngineV1__factory
+    PlayEstatesAddressProvider__factory
 } from "../../typechain-types";
 import { getEthersSigners } from "./contracts-helpers";
 import { getDb } from "./misc-utils";
@@ -73,3 +73,11 @@ export const getMembershipNFT = async (address?: tEthereumAddress) =>
         ).address,
         await getFirstSigner()
     );
+export const getAddressProvider = async (address?: tEthereumAddress) =>
+    await PlayEstatesAddressProvider__factory.connect(
+        address ||
+        (
+            await getDb().get(`${eContractid.AddressProvider}.${hre.network.name}`).value()
+        ).address,
+        await getFirstSigner()
+    );    
